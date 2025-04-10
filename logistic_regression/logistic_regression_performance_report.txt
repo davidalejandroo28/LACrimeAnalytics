@@ -1,0 +1,8 @@
+Model: logistic_regression
+Accuracy: 0.5832
+Precision (weighted): 0.5986
+Recall (weighted): 0.5832
+F1 Score (weighted): 0.5629
+
+Best Hyperparameters:
+{'C': 1, 'solver': 'lbfgs'}
