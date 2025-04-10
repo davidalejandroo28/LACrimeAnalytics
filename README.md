@@ -1,7 +1,3 @@
-Below is the complete README.md file with the additional instructions:
-
----
-
 # New Architecture Guidelines
 
 If you want to create a new architecture, please follow these steps:
