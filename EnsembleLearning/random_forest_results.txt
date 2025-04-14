@@ -1,5 +1,0 @@
-Model: random_forest
-Accuracy: 0.6670
-Precision (weighted): 0.6672
-Recall (weighted): 0.6670
-F1 Score (weighted): 0.6652
