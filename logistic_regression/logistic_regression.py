@@ -5,7 +5,6 @@ from sklearn.linear_model import LogisticRegression
 from evaluate import evaluate_model
 import os
 
-# ------------------ Data Loading ------------------
 # Path to the preprocessed data.
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -22,12 +21,10 @@ print(df.head())
 X = df.drop('crime_code', axis=1)
 y = df['crime_code']
 
-# ------------------ Train-Test Split ------------------
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-# ------------------ Logistic Regression with Grid Search ------------------
 # Initialize the logistic regression model.
 model = LogisticRegression(max_iter=1000, random_state=42)
 
@@ -44,7 +41,7 @@ grid_search.fit(X_train, y_train)
 
 print("Best hyperparameters:", grid_search.best_params_)
 
-# ------------------ Model Evaluation ------------------
+# Evaluate the model on the test set.
 y_pred = grid_search.predict(X_test)
 model_name = "logistic_regression"
 
