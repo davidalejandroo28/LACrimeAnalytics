@@ -1,0 +1,8 @@
+Model: bagging
+Accuracy: 0.6597
+Precision (weighted): 0.6611
+Recall (weighted): 0.6597
+F1 Score (weighted): 0.6571
+
+Best Hyperparameters:
+{'estimator__max_depth': 10, 'max_features': 0.7, 'max_samples': 1.0, 'n_estimators': 100}
