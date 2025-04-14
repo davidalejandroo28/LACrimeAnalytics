@@ -1,0 +1,8 @@
+Model: adaboost
+Accuracy: 0.6258
+Precision (weighted): 0.6301
+Recall (weighted): 0.6258
+F1 Score (weighted): 0.6246
+
+Best Hyperparameters:
+{'estimator__max_depth': 3, 'learning_rate': 0.3, 'n_estimators': 200}
