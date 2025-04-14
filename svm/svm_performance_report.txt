@@ -1,0 +1,8 @@
+Model: svm
+Accuracy: 0.6666
+Precision (weighted): 0.6689
+Recall (weighted): 0.6666
+F1 Score (weighted): 0.6635
+
+Best Hyperparameters:
+{'C': 1, 'class_weight': None, 'gamma': 'scale', 'kernel': 'rbf'}
