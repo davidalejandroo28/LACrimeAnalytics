@@ -29,12 +29,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 # ------------------ Logistic Regression with Grid Search ------------------
 # Initialize the logistic regression model.
-model = LogisticRegression(multi_class='multinomial', max_iter=1000, random_state=42)
+model = LogisticRegression(max_iter=1000, random_state=42)
 
 # Define the grid of hyperparameters.
 param_grid = {
-    'C': [0.001, 0.01, 0.1, 1, 10],
-    'solver': ['lbfgs', 'saga']  # Both support multinomial logistic regression.
+    'C': [0.001, 0.01, 0.1, 1, 2, 5, 10],
+    'solver': ['lbfgs', 'saga', 'newton-cg'],
+    'class_weight': ['balanced', None] # Both support multinomial logistic regression.
 }
 
 # Set up GridSearchCV.
