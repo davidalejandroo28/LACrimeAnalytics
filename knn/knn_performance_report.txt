@@ -1,0 +1,8 @@
+Model: knn
+Accuracy: 0.7394
+Precision (weighted): 0.7377
+Recall (weighted): 0.7394
+F1 Score (weighted): 0.7368
+
+Best Hyperparameters:
+{'metric': 'manhattan', 'n_neighbors': 17, 'weights': 'distance'}
