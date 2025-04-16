@@ -1,0 +1,8 @@
+Model: logistic_regression_poly
+Accuracy: 0.7686
+Precision (weighted): 0.7659
+Recall (weighted): 0.7686
+F1 Score (weighted): 0.7658
+
+Best Hyperparameters:
+{'logreg__C': 0.1, 'poly__degree': 2}

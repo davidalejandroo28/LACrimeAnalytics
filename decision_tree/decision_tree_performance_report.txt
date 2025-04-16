@@ -1,0 +1,8 @@
+Model: decision_tree
+Accuracy: 0.7448
+Precision (weighted): 0.7423
+Recall (weighted): 0.7448
+F1 Score (weighted): 0.7422
+
+Best Hyperparameters:
+{'criterion': 'entropy', 'max_depth': 10, 'min_samples_leaf': 2, 'min_samples_split': 10}

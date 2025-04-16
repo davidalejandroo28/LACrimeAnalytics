@@ -27,6 +27,7 @@ data_path = os.path.join(project_root, "data", "cleaned_crime_data_stratified.cs
 # Load data
 df = pd.read_csv(data_path)
 X = df.drop('crime_code', axis=1)
+X = X.drop('weapon_7', axis=1)
 y = df['crime_code']
 
 # Split data

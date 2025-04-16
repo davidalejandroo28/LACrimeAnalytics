@@ -1,0 +1,8 @@
+Model: logistic_regression_rfecv
+Accuracy: 0.7674
+Precision (weighted): 0.7649
+Recall (weighted): 0.7674
+F1 Score (weighted): 0.7640
+
+Best Hyperparameters:
+{'C': 1, 'class_weight': None, 'solver': 'lbfgs'}
