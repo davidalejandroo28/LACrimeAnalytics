@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 from sklearn.metrics import (
     confusion_matrix, ConfusionMatrixDisplay, accuracy_score, 
     precision_recall_fscore_support
@@ -6,31 +7,20 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 
 def evaluate_model(eval_y, pred_y, model_name, best_params, save_path):
-    """
-    Evaluates model predictions, saves a confusion matrix plot and writes overall statistics.
-    
-    Parameters:
-        eval_y (array-like): True labels.
-        pred_y (array-like): Predicted labels.
-        model_name (str): A name for the model used in the plot title and file names.
-        best_params (dict): The best hyperparameters obtained via GridSearchCV.
-        save_path (str): Directory in which the output files will be saved.
-    
-    Saves:
-        - A confusion matrix plot as '<model_name>_confusion_matrix.png' in save_path.
-        - A text file '<model_name>_performance_report.txt' in save_path that includes overall accuracy,
-          precision, recall, F1 score, and the best hyperparameters.
-    """
     # Ensure the save_path directory exists.
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     
-    # Compute confusion matrix with labels 0 to 9.
-    cm = confusion_matrix(eval_y, pred_y)
-    display_labels = list(range(10))
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
+    # Read the crime mapping CSV to determine display labels.
+    mapping_df = pd.read_csv("./data/crime_mapping.csv")
+    # Sort by crime code in case they are not ordered and get the list of labels.
+    display_labels = mapping_df.sort_values("crime_code")["crime_code"].tolist()
     
-    # Plot the confusion matrix and save to file.
+    # Compute confusion matrix.
+    cm = confusion_matrix(eval_y, pred_y)
+    
+    # Create and plot the confusion matrix with the labels from the CSV.
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=display_labels)
     disp.plot(cmap=plt.cm.Reds)
     plt.title(f"Confusion Matrix: {model_name}")
     plt.tight_layout()
