@@ -12,8 +12,6 @@ data_path = os.path.join(project_root, 'data', 'cleaned_crime_data_stratified.cs
 
 # Load dataset
 df = pd.read_csv(data_path)
-print("Dataset preview:")
-print(df.head())
 
 # Split features and target
 X = df.drop('crime_code', axis=1)
