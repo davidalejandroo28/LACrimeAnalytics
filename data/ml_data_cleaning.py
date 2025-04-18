@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import math
 
 # Load the CSV
 df = pd.read_csv("./data/Crime_Data_from_2020_to_Present.csv")
@@ -9,16 +10,14 @@ df['serious_crime'] = df['part'].apply(lambda x: 1 if x == 1 else 0)
 df = df.drop(columns=['part'])
 
 # Remove rows where victim_age, victim_sex, or victim_descent is blank or null.
-required_victim_cols = ['victim_age', 'victim_sex', 'victim_descent']
-df = df.dropna(subset=required_victim_cols)
+required_cols = ['victim_age', 'victim_sex', 'victim_descent', 'latitude', 'longitude', 'area']
+df = df.dropna(subset=required_cols)
 df = df[df['victim_sex'].str.strip() != '']
 df = df[df['victim_descent'].str.strip() != '']
 
 # Remove rows where victim_age is 0 or victim_sex/victim_descent equal "X"
 df = df[df['victim_age'] != 0]
 df = df[(df['victim_sex'] != 'X') & (df['victim_descent'] != 'X')]
-
-# df = df.dropna(subset=['weapon_code', 'premise_code'])
 
 # Filter to only include the top 10 most common crime_code values.
 top10_crime_codes = df['crime_code'].value_counts().nlargest(10).index
@@ -46,22 +45,30 @@ area_map_orig    = df[['area', 'area_name']].drop_duplicates()
 crime_map_orig   = df[['crime_code', 'crime_description']].drop_duplicates()
 
 # Coordinates of the center of the city of Los Angeles.
-center_lat = 34.055913  
-center_lon = -118.242575 
+center_lat = df["latitude"].mean()
+center_lon = df["longitude"].mean()
 
-# Method that calculates distance between two coordinates.
+# https://community.esri.com/t5/coordinate-reference-systems-blog/distance-on-a-sphere-the-haversine-formula/ba-p/902128#:~:text=For%20example%2C%20haversine(θ),longitude%20of%20the%20two%20points.
 def haversine(lat1, lon1, lat2, lon2):
-    """Calculate the great-circle distance between two points on the Earth."""
-    lat1, lon1, lat2, lon2 = map(np.radians, [lat1, lon1, lat2, lon2])
-    dlat = lat2 - lat1 
-    dlon = lon2 - lon1 
-    a = np.sin(dlat/2)**2 + np.cos(lat1) * np.cos(lat2) * np.sin(dlon/2)**2
-    c = 2 * np.arcsin(np.sqrt(a))
-    r = 6371  # Earth's radius in kilometers
-    return c * r
+    # convert all angles to radians
+    lat1, lon1, lat2, lon2 = map(np.radians, (lat1, lon1, lat2, lon2))
+    
+    dlat = lat1 - lat2
+    dlon = lon1 - lon2
+    
+    a = np.sin(dlat/2)**2 + np.cos(lat2) * np.cos(lat1) * np.sin(dlon/2)**2
+    c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
+    
+    R = 6371.0  # earth radius in km
+    return c * R
 
-# Feature engineered variable: distance from center.
-df['dist_from_center'] = haversine(df['latitude'], df['longitude'], center_lat, center_lon)
+# usage
+df['dist_from_center'] = haversine(
+    df['latitude'],
+    df['longitude'],
+    center_lat,
+    center_lon
+)
 
 # Remap the categorical variables to continuous integers.
 def create_mapping(series):
@@ -256,7 +263,6 @@ for code, group in df.groupby('crime_code'):
     print(f"Crime code {code} sample size after combining: {len(sample)}")
     samples_list.append(sample)
 df = pd.concat(samples_list)
-# Now we assign this final DataFrame to df.
 df = df.copy()
 
 # Write all dataframes to files.

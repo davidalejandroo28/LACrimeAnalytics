@@ -1,8 +1,8 @@
 Model: logistic_regression
-Accuracy: 0.7690
-Precision (weighted): 0.7664
-Recall (weighted): 0.7690
-F1 Score (weighted): 0.7658
+Accuracy: 0.7689
+Precision (weighted): 0.7682
+Recall (weighted): 0.7689
+F1 Score (weighted): 0.7671
 
 Best Hyperparameters:
 {'C': 1, 'class_weight': None, 'solver': 'saga'}
