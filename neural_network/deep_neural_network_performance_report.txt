@@ -1,0 +1,8 @@
+Model: deep_neural_network
+Accuracy: 0.6697
+Precision (weighted): 0.6714
+Recall (weighted): 0.6697
+F1 Score (weighted): 0.6678
+
+Best Hyperparameters:
+{'activation': 'relu', 'alpha': np.float64(0.0015620693675639863), 'hidden_layer_sizes': (100, 100), 'learning_rate_init': np.float64(0.00029375384576328325), 'solver': 'adam'}
