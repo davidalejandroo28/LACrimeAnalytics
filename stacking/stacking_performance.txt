@@ -1,0 +1,5 @@
+Model: stacking_classifier
+Accuracy: 0.6685
+Precision (weighted): 0.6687
+Recall (weighted): 0.6685
+F1 Score (weighted): 0.6666
