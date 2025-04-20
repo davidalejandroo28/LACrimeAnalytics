@@ -19,8 +19,6 @@ spec.loader.exec_module(evaluate_module)
 
 evaluate_model = evaluate_module.evaluate_model
 
-import os
-
 current_dir = os.getcwd()
 project_root = os.path.dirname(current_dir)
 data_path = os.path.join(project_root, "data", "cleaned_crime_data_stratified.csv")
