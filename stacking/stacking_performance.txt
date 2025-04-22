@@ -1,5 +1,8 @@
 Model: stacking_classifier
-Accuracy: 0.6685
-Precision (weighted): 0.6687
-Recall (weighted): 0.6685
-F1 Score (weighted): 0.6666
+Accuracy: 0.7585
+Precision (weighted): 0.7588
+Recall (weighted): 0.7585
+F1 Score (weighted): 0.7566
+
+Best Hyperparameters:
+{'rf__max_depth': None, 'rf__n_estimators': 100, 'svc__C': 1, 'svc__gamma': 'scale'}
