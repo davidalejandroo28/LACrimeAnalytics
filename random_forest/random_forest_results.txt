@@ -3,3 +3,6 @@ Accuracy: 0.7652
 Precision (weighted): 0.7612
 Recall (weighted): 0.7652
 F1 Score (weighted): 0.7611
+
+Best Hyperparameters:
+{'bootstrap': True, 'class_weight': 'balanced', 'max_depth': 15, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 10, 'n_estimators': 300}
