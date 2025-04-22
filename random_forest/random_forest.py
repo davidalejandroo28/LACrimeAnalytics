@@ -33,13 +33,16 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Define model and grid search params
-model = RandomForestClassifier(random_state=42)
 param_grid = {
-    'n_estimators': [100, 200],
-    'max_depth': [None, 10, 20],
-    'min_samples_split': [2, 5],
-    'class_weight': ['balanced', None]
+    'n_estimators': [200, 300, 500],         
+    'max_depth': [10, 15],                   
+    'min_samples_split': [5, 10],            
+    'min_samples_leaf': [1, 2],              
+    'max_features': ['sqrt', 'log2'],        
+    'bootstrap': [True],                   
+    'class_weight': ['balanced']             
 }
+
 
 # Run grid search
 grid_search = GridSearchCV(model, param_grid, cv=5, n_jobs=-1, verbose=1)
@@ -49,16 +52,11 @@ grid_search.fit(X_train, y_train)
 y_pred = grid_search.predict(X_test)
 
 # Evaluate
-accuracy = accuracy_score(y_test, y_pred)
-precision = precision_score(y_test, y_pred, average='weighted')
-recall = recall_score(y_test, y_pred, average='weighted')
-f1 = f1_score(y_test, y_pred, average='weighted')
-
-# Output
-print(f"\nModel: random_forest")
-print(f"Accuracy: {accuracy:.4f}")
-print(f"Precision (weighted): {precision:.4f}")
-print(f"Recall (weighted): {recall:.4f}")
-print(f"F1 Score (weighted): {f1:.4f}")
-print("\nBest Hyperparameters:")
-print(grid_search.best_params_)
+# Evaluate model using external function
+f1 = evaluate_model(
+    eval_y=y_test,
+    pred_y=y_pred,
+    model_name="RandomForest",
+    best_params=grid_search.best_params_,
+    save_path=current_dir
+)
